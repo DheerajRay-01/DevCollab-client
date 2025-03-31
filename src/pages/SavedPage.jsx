@@ -1,8 +1,11 @@
 import React from 'react'
+import SavedPostPage from '../components/SavedPostPage'
 
 function SavedPage() {
   return (
-    <div>SavedPage</div>
+    <div>
+      <SavedPostPage/>
+    </div>
   )
 }
 

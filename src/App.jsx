@@ -18,6 +18,7 @@ import PostReviewPage from "./pages/PostReviewPage.jsx";
 import { setFeedData } from "./redux/feedSlice.js";
 import PostViewPage from "./pages/PostViewPage.jsx";
 import AnalyticsPage from "./pages/AnalyticsPage.jsx";
+import { setSavedData } from "./redux/savedSlice.js";
 // import MyPostViewPage from "./pages/MyPostViewPage.jsx";
 
 
@@ -36,14 +37,17 @@ function App() {
   
     const fetchUserData = async () => {
       try {
-        const [userResponse, userPostsResponse] = await Promise.all([
+        const [userResponse, userPostsResponse,allSavedPost] = await Promise.all([
           axiosInstance.get("/user/get-user"),
           axiosInstance.get("/user/my-posts"),
+          axiosInstance.get("/post/all-saved"),
         ]);
   
         dispatch(setUser({ user: userResponse.data.data.user }));
         dispatch(setUserPost(userPostsResponse.data.data));
-        console.log(userPostsResponse.data.data)
+        dispatch(setSavedData(allSavedPost.data.data));
+        // console.log(allSavedPost.data.data);
+
 
       } catch (err) {
         console.error("User not logged in or error fetching user data:", err.message);

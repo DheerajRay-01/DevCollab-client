@@ -1,8 +1,11 @@
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaCodeBranch } from "react-icons/fa";
 import { GoIssueOpened } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
-import { FaCodeBranch } from "react-icons/fa"; // Icon for contribution button
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs"; // Save icons
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import axiosInstance from "../../../axios/axios.js";
+import SavePostBtn from "../savePost/SavePostBtn.jsx";
 
 const ProjectCard = ({ card }) => {
   const navigate = useNavigate();
@@ -14,28 +17,31 @@ const ProjectCard = ({ card }) => {
   return (
     <div
       className="w-full bg-white shadow-lg rounded-xl overflow-hidden p-6 border border-gray-200 transition-transform transform hover:scale-[1.03] hover:shadow-xl flex flex-col h-full cursor-pointer"
-      onClick={handleClick} // ✅ Clicking the card navigates
+      onClick={handleClick}
     >
-      {/* Owner Profile */}
-      <div className="flex items-center gap-4 mb-5">
-        <img
-          src={card.avatar_url}
-          alt={card.name}
-          className="w-14 h-14 rounded-full border border-gray-300"
-        />
-        <div>
-          <a
-            href={card.ownerProfile}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-900 font-semibold hover:underline"
-            aria-label={`Visit ${card.name}'s GitHub profile`}
-            onClick={(e) => e.stopPropagation()} // ✅ Prevents navigation on click
-          >
-            {card.name}
-          </a>
-          <p className="text-xs text-gray-500">@{card.login}</p>
+      {/* Top Section: Owner & Save Button */}
+      <div className="flex justify-between items-center mb-5">
+        <div className="flex items-center gap-4">
+          <img
+            src={card.avatar_url}
+            alt={card.name}
+            className="w-14 h-14 rounded-full border border-gray-300"
+          />
+          <div>
+            <a
+              href={card.ownerProfile}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-900 font-semibold hover:underline"
+              aria-label={`Visit ${card.name}'s GitHub profile`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {card.name}
+            </a>
+            <p className="text-xs text-gray-500">@{card.login}</p>
+          </div>
         </div>
+        <SavePostBtn card={card} />
       </div>
 
       {/* Project Title */}
@@ -83,7 +89,7 @@ const ProjectCard = ({ card }) => {
           rel="noopener noreferrer"
           className="w-full sm:w-1/2 bg-gray-900 text-white px-5 py-3 rounded-lg text-sm hover:bg-gray-700 flex items-center gap-2 justify-center transition"
           aria-label={`View ${card.repoName} repository on GitHub`}
-          onClick={(e) => e.stopPropagation()} // ✅ Prevents card click event
+          onClick={(e) => e.stopPropagation()}
         >
           <FaGithub className="w-5 h-5 shrink-0" />
           <span>Repository</span>
@@ -96,7 +102,7 @@ const ProjectCard = ({ card }) => {
           rel="noopener noreferrer"
           className="w-full sm:w-1/2 bg-blue-600 text-white px-5 py-3 rounded-lg text-sm hover:bg-blue-500 flex items-center gap-2 justify-center transition"
           aria-label={`View open issues for ${card.repoName}`}
-          onClick={(e) => e.stopPropagation()} // ✅ Prevents card click event
+          onClick={(e) => e.stopPropagation()}
         >
           <FaCodeBranch className="w-5 h-5 shrink-0" />
           <span>Contribute</span>

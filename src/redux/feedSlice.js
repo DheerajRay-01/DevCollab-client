@@ -13,7 +13,7 @@ export const feedSlice = createSlice({
     },
     deleteFeedData: (state, action) => {
       const idToDelete = action.payload; // ✅ Extracts `id` directly from payload
-      state.feed = state.feed.filter((item) => item.id !== idToDelete); // ✅ Removes matching item
+      state.feed = state.feed.filter((item) => item._id !== idToDelete); // ✅ Removes matching item
     },
   },
 });

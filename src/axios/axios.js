@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
+  // baseURL: "http://localhost:8001" ,
   baseURL: import.meta.env.VITE_CORS_ORIGIN ,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },

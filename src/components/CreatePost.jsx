@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axiosInstance from "../axios/axios.js";
 import RepoCard from "./RepoCard.jsx";
 
@@ -9,6 +9,8 @@ function CreatePost() {
   const [loading, setLoading] = useState(false);
   const [allRepo, SetAllRepo] = useState(null);
   const [isAllRepoOpen, setIsAllRepoOpen] = useState(false);
+  const [isFetchingRepo , setIsFetchingRepo] = useState(false)
+  const formRef = useRef()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,13 +39,20 @@ function CreatePost() {
   };
 
   const handleFetchAllRepo = async () => {
-    setIsAllRepoOpen((pre)=>!pre)
+    if(isAllRepoOpen){
+      setIsAllRepoOpen(false)
+      return
+    } 
+    setIsFetchingRepo(true)
     try {
       const allRepo = await axiosInstance.get("/user/my-repo");
       console.log(allRepo.data);
       SetAllRepo(allRepo?.data.data);
     } catch (error) {
-      console.error("Error fetching all repos:", error);
+      console.error("Error fetching all repos:", error);  
+    }finally{
+      setIsFetchingRepo(false)
+      setIsAllRepoOpen((pre)=>!pre)
     }
   };
 
@@ -55,7 +64,7 @@ function CreatePost() {
       </h3>
 
       {/* Input & Button */}
-      <form onSubmit={handleSubmit} className="mb-4">
+      <form onSubmit={handleSubmit} ref={formRef} className="mb-4">
         <div className="flex flex-col sm:flex-row gap-3">
         <input
   type="text"
@@ -103,11 +112,12 @@ function CreatePost() {
         className="bg-blue-500 cursor-pointer text-white px-5 py-3 rounded-md mt-5 w-full hover:bg-blue-600 transition-all"
         onClick={handleFetchAllRepo}
       >
-        See All Repositories
+        {isFetchingRepo ? "Fetching" : "See All Repositories"}
       </button>
 
       {/* Repositories List */}
       <div className="mt-4 max-h-80 overflow-y-auto border rounded-lg shadow-sm bg-gray-50 p-3">
+       
         <ul className="divide-y divide-gray-300">
           {allRepo?.length > 0 && isAllRepoOpen ? (
             allRepo.map((repo) => (
@@ -115,7 +125,11 @@ function CreatePost() {
               key={repo.id}
               className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 cursor-pointer 
                          hover:bg-gray-200 rounded-md transition-all"
-              onClick={() => setRepo(repo.name)}
+              onClick={() =>{
+                setRepo(repo.name)
+                formRef.current.requestSubmit()
+              }}
+              
             >
               <p className="font-medium text-gray-800">{repo.name}</p>
               <p className="text-gray-600 text-sm sm:text-right">Updated: {repo.updated_at}</p>
