@@ -64,7 +64,7 @@ function Header() {
             <NavLink
               to={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
               className={({ isActive }) =>
-                `px-4 py-2 rounded-lg font-medium transition-all ${
+                `px-4 py-2 rounded-lg font-medium transition-all flex items-center ${
                   isActive ? "bg-gray-800 text-indigo-400" : "hover:text-gray-300"
                 }`
               }

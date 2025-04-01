@@ -60,8 +60,9 @@ function PostReviewCard({
 
     
 <div className="max-w-5xl mx-auto p-6 sm:p-8 bg-white shadow-lg rounded-lg mt-6 relative pt-15">
-
-  <SavePostBtn card={data} isInPreview="true"/>
+{
+ !creatingPost &&  <SavePostBtn card={data} isInPreview="true"/>
+}
 
 {
 data?.login === userLogin && !creatingPost ? <AdminAccessCard post_id={data._id} isPublic={data.isPublic}/> : null}

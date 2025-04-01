@@ -3,10 +3,14 @@ import { Eye, EyeOff, BarChart, Trash2  } from "lucide-react";
 import axiosInstance from "../../../axios/axios.js";
 import { useNavigate } from "react-router";
 import {useDispatch} from 'react-redux'
-import { deleteFeedData } from "../../../redux/feedSlice.js";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
+import { deleteFeedData } from "../../../redux/feedSlice.js";
+import { changePostVisibility, deleteUserPost } from "../../../redux/userSlice.js";
+import { deleteSavedData } from "../../../redux/savedSlice.js";
 
 function AdminAccessCard({ post_id ,isPublic}) {
+  // console.log(post_id);
+  
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [showConfirm, setShowConfirm] = useState(false); // Show confirmation pop-up
@@ -19,7 +23,11 @@ function AdminAccessCard({ post_id ,isPublic}) {
     try {
       const res = await axiosInstance.get(`/post/change-visibility/id/${post_id}`);
       console.log("Visibility updated:", res.data.data.isPublic);
+
+      dispatch(deleteFeedData(post_id))
+      dispatch(changePostVisibility(post_id))
       setIsPostPublic(res.data.data.isPublic);
+
     } catch (error) {
       console.error("Error toggling visibility:", error);
     } finally {
@@ -33,7 +41,10 @@ function AdminAccessCard({ post_id ,isPublic}) {
     try {
       const response = await axiosInstance.delete(`/post/delete/id/${post_id}`);
       if (response.status === 200) {
+
         dispatch(deleteFeedData(post_id))
+        dispatch(deleteUserPost(post_id))
+        dispatch(deleteSavedData(post_id))
         navigate("/");
       }
     } catch (error) {

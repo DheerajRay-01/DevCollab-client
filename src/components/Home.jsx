@@ -1,12 +1,14 @@
 import ProjectCard from "./elements/cards/ProjectCard.jsx";
 import dummyData from "./dummyData.js";
 import { useSelector } from "react-redux";
+import LoadingPage from "../pages/LoadingPage.jsx";
 
 function Home() {
 
   const feed = useSelector((state)=> state.feed.feed)
+  
 
-  return (
+  return  (
     <div className="min-h-screen px-4 sm:px-8 py-8">
       <div className="max-w-7xl mx-auto">
         {/* Title Section */}
@@ -22,7 +24,7 @@ function Home() {
         </div>
       </div>
     </div>
-  );
+  ) 
 }
 
 export default Home;

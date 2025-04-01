@@ -15,9 +15,13 @@ export const feedSlice = createSlice({
       const idToDelete = action.payload; // ✅ Extracts `id` directly from payload
       state.feed = state.feed.filter((item) => item._id !== idToDelete); // ✅ Removes matching item
     },
+    addFeedData: (state, action) => {
+      const newFeed = action.payload; // ✅ Extracts `id` directly from payload
+      state.feed.push(newFeed)
+    },
   },
 });
 
-export const { setFeedData, deleteFeedData } = feedSlice.actions;
+export const { setFeedData, deleteFeedData,addFeedData } = feedSlice.actions;
 
 export default feedSlice.reducer;

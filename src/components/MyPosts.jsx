@@ -4,6 +4,8 @@ import MyPostCard from "./elements/cards/MyPostCard";
 
 function MyPosts() {
   const postInfo = useSelector((state) => state.user?.userPosts);
+  console.log(postInfo);
+  
 
   if (postInfo.length === 0) {
     return (
@@ -13,7 +15,7 @@ function MyPosts() {
     );
   }
 
-  return (
+  return ( 
     <div className="container mx-auto px-6 py-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
         {postInfo.map((post) => (

@@ -13,14 +13,14 @@ export const savedSlice = createSlice({
     },
     deleteSavedData: (state, action) => {
       const idToDelete = action.payload; // ✅ Extracts `id` directly from payload
-      state.saved = state.saved.filter((item) => item._id !== idToDelete); // ✅ Removes matching item
+      state.saved = state.saved.filter((item) => item.post !== idToDelete); // ✅ Removes matching item
     },
     AddSavedData: (state, action) => {
       const newSave = action.payload; // ✅ Extracts `id` directly from payload
-      
+
       // Check if the item already exists before adding
-      const exists = state.saved.some(item => item._id === newSave._id);
-      
+      const exists = state.saved.some((item) => item._id === newSave._id);
+
       if (!exists) {
         state.saved.push(newSave); // ✅ Add only if it doesn't already exist
       }
@@ -28,6 +28,7 @@ export const savedSlice = createSlice({
   },
 });
 
-export const { setSavedData, deleteSavedData ,AddSavedData} = savedSlice.actions;
+export const { setSavedData, deleteSavedData, AddSavedData } =
+  savedSlice.actions;
 
 export default savedSlice.reducer;
