@@ -107,7 +107,7 @@ function Header() {
               <ul className="py-2">
                 <li
                   onClick={() => {
-                    navigate(`/profile/my-profile/${user.login}`);
+                    navigate(`/profile/my-profile/${user?.login}`);
                     setDropdownOpen(false);
                   }}
                   className="px-4 py-2 flex items-center gap-2 hover:bg-gray-200 cursor-pointer transition-all"
