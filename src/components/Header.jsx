@@ -7,7 +7,7 @@ function Header() {
 
   const user = useSelector((state) => state.user?.user?.user);
 
-  const imgURL = user?.avatar_url || "./src/assets/avtar.png";
+  const imgURL = user?.avatar_url || "./src/public/avtar.png";
 
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
