@@ -10,7 +10,6 @@ function Login() {
     setIsLoading(true); // Disable button
     try {
       const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
-      // const redirectUri = encodeURIComponent("http://localhost:8001/auth/callback");
       const redirectUri = encodeURIComponent(import.meta.env.VITE_GITHUB_OAUTH_CALLBACK);
 
       if (!clientId) {
