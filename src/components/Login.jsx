@@ -11,7 +11,8 @@ function Login() {
     try {
       const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
       const redirectUri = encodeURIComponent(import.meta.env.VITE_GITHUB_OAUTH_CALLBACK);
-
+      console.log(redirectUri);
+      
       if (!clientId) {
         throw new Error("GitHub Client ID is missing. Check your environment variables.");
       }
