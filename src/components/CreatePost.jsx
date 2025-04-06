@@ -11,7 +11,7 @@ function CreatePost() {
   const [allRepo, SetAllRepo] = useState(null);
   const [isAllRepoOpen, setIsAllRepoOpen] = useState(false);
   const [isFetchingRepo , setIsFetchingRepo] = useState(false)
-  const formRef = useRef()
+  // const formRef = useRef()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,10 +39,10 @@ function CreatePost() {
     }
   };
 
-  useEffect(()=>{
-    if(!repo) return
-   formRef.current.requestSubmit()
-  },[repo])
+  // useEffect(()=>{
+  //   if(!repo) return
+  //  formRef.current.requestSubmit()
+  // },[repo])
 
   const handleFetchAllRepo = async () => {
     if(isAllRepoOpen){
@@ -70,7 +70,7 @@ function CreatePost() {
       </h3>
 
       {/* Input & Button */}
-      <form onSubmit={handleSubmit} ref={formRef} className="mb-4">
+      <form onSubmit={handleSubmit}  className="mb-4">
         <div className="flex flex-col sm:flex-row gap-3">
         <input
   type="text"
