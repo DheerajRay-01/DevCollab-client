@@ -9,9 +9,7 @@
     server: {
       proxy: {
         "/api": {
-          target: "http://localhost:8001", // Your backend server
-          // target: "https://devcollab-server-0ozn.onrender.com", // Your backend server
-          // target: import.meta.env.VITE_CORS_ORIGIN , // Your backend server
+          target: import.meta.env.VITE_CORS_ORIGIN , 
           changeOrigin: true,
           secure: false, // Set to true if using HTTPS  
           rewrite: (path) => path.replace(/^\/api/, ""),
