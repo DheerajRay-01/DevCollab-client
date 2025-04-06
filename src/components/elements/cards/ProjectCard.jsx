@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import axiosInstance from "../../../axios/axios.js";
 import SavePostBtn from "../savePost/SavePostBtn.jsx";
+import { useSelector } from "react-redux";
 
 const ProjectCard = ({ card }) => {
+   const user = useSelector((state) => state.user.user?.user);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -26,26 +28,44 @@ const ProjectCard = ({ card }) => {
             src={card.avatar_url}
             alt={card.name}
             className="w-14 h-14 rounded-full border border-gray-300"
+            onClick={(e) => {
+              e.stopPropagation()
+              navigate(`/profile/user-profile/${card.login}`)
+            }}
           />
           <div>
             <a
-              href={card.ownerProfile}
+              // href={card.ownerProfile}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-900 font-semibold hover:underline"
               aria-label={`Visit ${card.name}'s GitHub profile`}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation()
+                navigate(`/profile/user-profile/${card.login}`)
+              }}
             >
               {card.name}
             </a>
             <p className="text-xs text-gray-500">@{card.login}</p>
           </div>
         </div>
-        <SavePostBtn card={card} />
+       { user && <SavePostBtn card={card} />}
       </div>
 
       {/* Project Title */}
-      <h2 className="text-lg font-bold text-gray-900 mb-2">{card.repoName}</h2>
+      <div className="mb-2">
+  <h2 className="text-lg font-bold text-gray-900">{card.repoName}</h2>
+  {card.createdAt && (
+    <p className="text-xs text-gray-500 mt-1">
+      Posted on {new Date(card.createdAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })}
+    </p>
+  )}
+</div>
 
       {/* Description */}
       <p className="text-gray-700 text-sm flex-grow">

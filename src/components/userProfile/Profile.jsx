@@ -1,11 +1,42 @@
 import { useSelector } from "react-redux";
+import { useParams } from "react-router";
+import axiosInstance from "../../axios/axios";
+import {useState,useEffect } from "react";
 
 const Profile = () => {
-  const user = useSelector((state) => state.user.user?.user); // Ensure safe access
+  const userData = useSelector((state) => state.user.user?.user);
+  const [user, setUser] = useState(null); 
+
+  const { userId, mode } = useParams();
+  console.log(userId, mode);
+
+  useEffect(() => {
+    const getUserProfile = async () => {
+      try {
+        const response = await axiosInstance.get(`/user/get-user-profile?userId=${userId}`);
+        console.log(response.data);
+        setUser(response.data.data);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    if (mode === "user-profile") {
+      getUserProfile();
+    } else {
+      setUser(userData);
+    }
+  }, [mode, userId, userData]); // Added userData as a dependency
 
   if (!user) {
-    return <p className="text-center text-gray-600 mt-10">Loading profile...</p>;
+    return (
+      <div className="flex flex-col justify-center items-center h-screen space-y-4">
+        <p className="text-lg font-medium text-gray-700">Fetching...</p>
+        <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+      </div>
+    );
   }
+  
 
   return (
     <div className="flex flex-col items-center px-6 py-12 space-y-8 text-gray-900">
@@ -20,7 +51,11 @@ const Profile = () => {
         )}
         <h2 className="text-3xl font-bold tracking-wide">{user.name || user.login}</h2>
         <p className="text-gray-500 text-lg">@{user.login}</p>
-        {user.bio && <p className="text-gray-700 max-w-xl leading-relaxed">{user.bio}</p>}
+        {user.bio && <p className="text-gray-700 max-w-xl leading-relaxed">
+          {
+            user.bio
+          }
+        </p>}
       </div>
 
       {/* Profile Links */}

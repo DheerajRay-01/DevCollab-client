@@ -1,8 +1,11 @@
 import React from 'react'
+import ExplorePost from '../components/ExplorePost'
 
 function ExplorePage() {
   return (
-    <div>ExplorePage</div>
+    <div>
+      <ExplorePost/>
+    </div>
   )
 }
 

@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axiosInstance from "../axios/axios.js";
 import RepoCard from "./RepoCard.jsx";
+import { Link } from "react-router";
 
 function CreatePost() {
   const [repo, setRepo] = useState("");
@@ -38,6 +39,11 @@ function CreatePost() {
     }
   };
 
+  useEffect(()=>{
+    if(!repo) return
+   formRef.current.requestSubmit()
+  },[repo])
+
   const handleFetchAllRepo = async () => {
     if(isAllRepoOpen){
       setIsAllRepoOpen(false)
@@ -59,7 +65,7 @@ function CreatePost() {
   return (
     <div className="max-w-2xl mx-auto p-6 shadow-lg rounded-lg border border-gray-200 bg-white transition-all w-full">
       {/* Heading */}
-      <h3 className="text-2xl font-semibold text-gray-900 mb-5 text-center">
+      <h3 className="text-2xl font-semibold text-gray-900 mb-5 text-center" id="#id">
         Fetch GitHub Repository Data
       </h3>
 
@@ -127,7 +133,6 @@ function CreatePost() {
                          hover:bg-gray-200 rounded-md transition-all"
               onClick={() =>{
                 setRepo(repo.name)
-                formRef.current.requestSubmit()
               }}
               
             >

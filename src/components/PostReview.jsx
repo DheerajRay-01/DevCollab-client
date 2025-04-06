@@ -14,12 +14,12 @@ function PostReview() {
 
   const [loading, setLoading] = useState(false);
   const [postDescription, setPostDescription] = useState(
-    postData?.repoData?.description || ""
+    postData?.repoData?.description || `${postData?.repoData?.repoName} is an open-source project designed to simplify development and enhance collaboration. Explore its features and contribute! 🚀`,
   );
 
   if (!postData || !postData.repoData) {
     return <Navigate to="/" />;
-  }
+  } 
 
   const data = {
     repoName: postData?.repoData?.repoName || "",
@@ -30,7 +30,7 @@ function PostReview() {
     starCount: postData?.repoData?.starCount || 0,
     contributorCount: postData?.repoData?.contributorCount || 0,
     issuesCount: postData?.repoData?.issuesCount || 0,
-    description: postDescription || "No description available",
+    description: postDescription ,
     license: postData?.repoData?.license || "No License",
     issues_url: postData?.repoData?.issues_url || "#",
     contributors_url: postData?.repoData?.contributors_url || "#",

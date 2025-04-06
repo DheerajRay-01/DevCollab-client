@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, NavLink } from "react-router";
+import { useNavigate, NavLink, useParams } from "react-router";
 import { FiMenu, FiX, FiSearch, FiUser, FiSettings, FiLogOut } from "react-icons/fi";
 import { useSelector } from "react-redux";
 
 function Header() {
+
   const user = useSelector((state) => state.user?.user?.user);
+
   const imgURL = user?.avatar_url || "./src/assets/avtar.png";
 
   const navigate = useNavigate();
@@ -12,6 +14,8 @@ function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [hasShadow, setHasShadow] = useState(false);
   const dropdownRef = useRef(null);
+  
+
 
   // Close dropdown when clicking outside or pressing Escape
   useEffect(() => {
@@ -103,7 +107,7 @@ function Header() {
               <ul className="py-2">
                 <li
                   onClick={() => {
-                    navigate("/profile");
+                    navigate(`/profile/my-profile/${user.login}`);
                     setDropdownOpen(false);
                   }}
                   className="px-4 py-2 flex items-center gap-2 hover:bg-gray-200 cursor-pointer transition-all"

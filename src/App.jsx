@@ -10,7 +10,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx"; 
 import LoginPage from "./pages/LoginPage .jsx";
 import LogoutPage from "./pages/LogoutPage.jsx";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { setUser, setUserPost } from "./redux/userSlice.js";
 import { useEffect, useState } from "react";
 import axiosInstance from "./axios/axios.js";
@@ -24,12 +24,15 @@ import LoadingFailedPage from "./pages/LoadingFailedPage.jsx";
 
 function App() {
   const dispatch = useDispatch();
+  const {currentPage , limit} = useSelector((state)=> state.feed.feed)
+console.log(currentPage);
+
 
   useEffect(() => {
     
     const fetchFeed = async () => {
       try {
-        const feedResponse = await axiosInstance.get("/post/get-all-post");
+        const feedResponse = await axiosInstance.get(`/post/get-all-post?p=${currentPage}&l=${limit}`);
         dispatch(setFeedData(feedResponse.data.data));
       } catch (err) {
         console.error("Error fetching feed data:", err.message);
@@ -77,7 +80,7 @@ function App() {
             <Route path="create-post" element={<CreatePostPage />} />
             <Route path="saved" element={<SavedPage />} />
             <Route path="my-repos" element={<MyRepoPage />} />
-            <Route path="profile" element={<ProfilePage />} />
+            <Route path="profile/:mode/:userId" element={<ProfilePage />} />
             <Route path="logout" element={<LogoutPage/>} />
             <Route path="review-create-post" element={<PostReviewPage/>} />
             <Route path="/view/:post/:id" element={<PostViewPage/>} />
@@ -88,6 +91,7 @@ function App() {
 
         {/* Public Routes */}
         <Route path="/login" element={<LoginPage/>} />
+        <Route path="/failed" element={<LoadingFailedPage/>} />
 
 
         {/* Catch-All Route for 404 */}

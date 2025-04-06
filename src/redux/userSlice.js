@@ -23,11 +23,17 @@ export const userSlice = createSlice({
       console.log(newPost);
       
       state.userPosts.push(newPost) 
+      state.user.user.posts_created =state.user.user.posts_created+ 1; 
       // console.log(state.userPosts);
     },
     deleteUserPost :(state, action) => {
       const idToDelete = action.payload; 
       state.userPosts = state.userPosts.filter((post)=>post._id !== idToDelete )
+      state.user.user.posts_created = Math.max(0,state.user.user.posts_created -1)
+    },
+    deleteAllUserPost :(state, action) => {
+      state.userPosts = []
+      state.user.user.posts_created=0
     },
 
     changePostVisibility:(state, action)=>{
@@ -38,6 +44,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser,setUserPost,deleteUserPost ,addUserPost,changePostVisibility} = userSlice.actions;
+export const { setUser, clearUser,setUserPost,deleteUserPost ,addUserPost,changePostVisibility , deleteAllUserPost} = userSlice.actions;
 
 export default userSlice.reducer;
