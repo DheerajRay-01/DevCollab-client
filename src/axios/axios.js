@@ -9,7 +9,6 @@ const axiosInstance = axios.create({
 
 let isRefreshing = false;
 let refreshPromise = null; // Stores the refresh request promise
-
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
