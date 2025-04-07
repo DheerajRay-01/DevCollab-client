@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { FaSignOutAlt } from "react-icons/fa";
+import {useDispatch } from "react-redux";
 import axiosInstance from "../axios/axios";
+import { clearUser } from "../redux/userSlice";
 
 function LogoutPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false);
 
   // Handle Logout Function
   const handleLogout = async () => {
     if (loading) return; // Prevent multiple clicks
     setLoading(true);
-
+  
     try {
       await axiosInstance.post("/user/logout");
-      localStorage.removeItem("accessToken"); // Clear token from local storage
+      dispatch(clearUser())
       navigate("/login"); // Redirect to login page
     } catch (error) {
       console.error("Error during logout:", error);
