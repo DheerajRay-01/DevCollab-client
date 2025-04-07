@@ -128,7 +128,10 @@ function Header() {
                     navigate("/logout");
                     setDropdownOpen(false);
                   }}
-                  className={`px-4 py-2 flex items-center gap-2 hover:${user?"bg-red-500" : "bg-green-500"} hover:text-white cursor-pointer transition-all`}
+                  className={`px-4 py-2 flex items-center gap-2 hover:text-white cursor-pointer transition-all ${
+                    user ? 'hover:bg-red-500' : 'hover:bg-green-500'
+                  }`}
+              
                 >
                   {
                     !user ? (<><FiLogIn /> Login </>) : (<><FiLogOut /> Logout</>)
