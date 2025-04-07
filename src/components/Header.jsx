@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, NavLink, useParams } from "react-router";
-import { FiMenu, FiX, FiSearch, FiUser, FiSettings, FiLogOut } from "react-icons/fi";
+import { FiMenu, FiX, FiSearch, FiUser, FiSettings, FiLogOut ,FiLogIn} from "react-icons/fi";
 import { useSelector } from "react-redux";
 
 function Header() {
@@ -130,7 +130,9 @@ function Header() {
                   }}
                   className="px-4 py-2 flex items-center gap-2 hover:bg-red-500 hover:text-white cursor-pointer transition-all"
                 >
-                  <FiLogOut /> Logout
+                  {
+                    user ? (<><FiLogIn /> Login </>) : (<><FiLogOut /> Logout</>)
+                  }
                 </li>
               </ul>
             </div>
