@@ -4,7 +4,7 @@ const initialState = {
   feed:{
     feed:[],
     currentPage:0,
-    limit:3
+    limit:6
   }  // ✅ Ensures `feed` is always an array
 };
 
