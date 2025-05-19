@@ -76,12 +76,12 @@ function AdminAccessCard({ post_id ,isPublic}) {
       </button>
 
       {/* View Analytics */}
-      <button
+      {/* <button
         onClick={onViewAnalytics}
         className="text-green-600 hover:text-green-800 transition-all duration-200 cursor-pointer"
       >
         <BarChart className="w-5 h-5" />
-      </button>
+      </button> */}
 
       {/* Delete Post */}
       <div className="relative">

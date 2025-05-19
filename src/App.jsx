@@ -23,6 +23,7 @@ import LoadingPage from "./pages/LoadingPage.jsx";
 import LoadingFailedPage from "./pages/LoadingFailedPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
+import { detectBrowser } from "./components/browser/checkBrowser.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,8 +63,6 @@ function App() {
   
     fetchFeed(); 
     fetchUserData(); 
-
-
   }, []); 
 
 

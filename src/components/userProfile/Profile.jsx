@@ -8,7 +8,7 @@ const Profile = () => {
   const [user, setUser] = useState(null); 
 
   const { userId, mode } = useParams();
-  console.log(userId, mode);
+  // console.log(userId, mode);
 
   useEffect(() => {
     const getUserProfile = async () => {

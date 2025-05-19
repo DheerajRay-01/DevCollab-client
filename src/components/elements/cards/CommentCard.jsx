@@ -1,10 +1,18 @@
 import React from 'react';
 import { MdDelete } from 'react-icons/md';
 import axiosInstance from '../../../axios/axios';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 function CommentCard({ data , fetch}) {
-  const handleUserClick = () => {
-    alert(`Navigate to @${data.username}'s profile`);
+   const userData = useSelector((state) => state.user.user?.user);
+  const isOwner = userData._id === data.userId ? true : false
+  const navigate = useNavigate()
+  
+  const handleUserClick = (e) => {
+              e.stopPropagation()
+              navigate(`/profile/user-profile/${data.username}`)
+    
   };
 
   const handleDeleteClick = async () => {
@@ -27,12 +35,12 @@ function CommentCard({ data , fetch}) {
   return (
     <div className="relative bg-white rounded-2xl shadow-md p-4 m-3 w-full max-w-2xl">
       {/* Delete Button */}
-      <button
+   {  isOwner&&  <button
         onClick={handleDeleteClick}
         className="absolute top-3 right-3 text-red-500 hover:text-red-700"
       >
         <MdDelete size={25} className='cursor-pointer mt-3'/>
-      </button>
+      </button>}
 
       <button
         onClick={handleUserClick}

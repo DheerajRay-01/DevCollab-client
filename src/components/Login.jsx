@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import {   handelGuestTrue } from "../redux/userSlice";
+import { detectBrowser } from "./browser/checkBrowser";
 
 function Login() {
   const [isLoading, setIsLoading] = useState(false); // State to manage button disabling
@@ -33,6 +34,17 @@ function Login() {
     dispatch(handelGuestTrue())
     navigate("/");
   };
+
+
+
+  useEffect(()=>{
+detectBrowser()
+    .then((browser )=>{
+      if(browser == "Brave" || browser == "Firefox"){
+        alert("Firefox & Brave browsers are not supported.\nPlease use a different browser.")
+      }
+      });
+  },[])
 
   return (
     <div className="flex justify-center items-center min-h-screen px-4">
