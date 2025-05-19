@@ -1,4 +1,4 @@
-import Contact from '../components/contact'
+import Contact from '../components/Contact.jsx'
 
 function ContactPage() {
   return (
