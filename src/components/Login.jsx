@@ -41,7 +41,7 @@ function Login() {
 detectBrowser()
     .then((browser )=>{
       if(browser == "Brave" || browser == "Firefox"){
-        alert("Firefox & Brave browsers are not supported.\nPlease use a different browser.")
+        alert("Firefox & Brave browsers are currently not supported.\nPlease use a different browser.")
       }
       });
   },[])
