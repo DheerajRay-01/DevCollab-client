@@ -11,7 +11,7 @@ const Contact = () => {
     e.preventDefault();
     setIsSending(true)
 
-    emailjs.sendForm(import.meta.env.VITE_EMAIL_JS_SERVICE_ID,import.meta.env.VITE_EMAIL_JS_TEMPLATE_ID, form.current,import.meta.env.VITE_EMAIL_JS_API_KEY)
+    emailjs.sendForm(import.meta.env.VITE_EMAIL_JS_SERVICE_ID,import.meta.env.VITE_EMAIL_JS_TEMPLATE_ID, form.current,import.meta.env.VITE_EMAIL_JS_API)
       .then(() => {
         setStatus('Message sent successfully!');
         form.current.reset();
