@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import axiosInstance from "../axios/axios";
 import { useSelector } from "react-redux";
 import AdminAccessCard from "./elements/cards/AdminAccessCard";
-import Comment from "./elements/comment/comment";
+import Comment from "./elements/comment/Comment.jsx";
 
 
 function PostView() {
