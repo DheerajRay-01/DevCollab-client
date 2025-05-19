@@ -14,7 +14,7 @@ export default function Footer() {
 
         {/* Right Side - Navigation Links */}
         <ul className="flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-6 mt-3 md:mt-0">
-          {["Privacy Policy", "Terms of Service", "Contact"].map((item, index) => (
+          {["Privacy-Policy", "Terms of Service", "Contact"].map((item, index) => (
             <li key={index}>
               <a 
                 href={`/${item}`} 

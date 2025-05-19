@@ -24,6 +24,7 @@ import LoadingFailedPage from "./pages/LoadingFailedPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import { detectBrowser } from "./components/browser/checkBrowser.js";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -87,6 +88,7 @@ function App() {
             <Route path="/my-post/:post/:id" element={<PostViewPage/>} />
             <Route path="/analytics/:id" element={<AnalyticsPage/>} />
             <Route path="/Contact" element={<ContactPage/>  } />
+            <Route path="/Privacy-Policy" element={<PrivacyPolicyPage/>  } />
           </Route>
         </Route>
 
