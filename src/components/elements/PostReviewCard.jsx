@@ -4,7 +4,6 @@ import ProgressBar from "./progressBar/ProgressBar";
 import ImageCard from "./cards/ImageCard";
 import { useSelector } from "react-redux";
 import AdminAccessCard from "./cards/AdminAccessCard";
-import axiosInstance from "../../axios/axios";
 import {
   FaCodeBranch,
   FaStar,
@@ -27,6 +26,7 @@ function PostReviewCard({
   data,
   handlePostCardSubmitBtn,
   setPostDescription,
+  setPostTags,
   loading,
   creatingPost = true,
   ...props
@@ -262,6 +262,32 @@ function PostReviewCard({
             />
           </div>
         </div>
+         
+  {/* Tags Section */}
+        {data.tags && data.tags.trim().length > 0 && (
+          <div className="bg-gray-100 p-6 rounded-lg shadow-md ">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4"> {creatingPost ? "🏷️ Add Relevant Tags" : "🏷️ Tags"}</h2>
+            <div className="flex flex-wrap gap-3">
+              {data.tags.split(/[ ,]+/).reverse().map((tag, index) => (
+                <span key={index} className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md hover:bg-blue-600 transition-all">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            {creatingPost && (
+              <input
+                type="text"
+                className="mt-4 w-full p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Add or edit tags"
+                value={data.tags}
+                onChange={(e) => setPostTags(e.target.value)}
+                // disabled={!creatingPost}
+              />
+            )}
+          </div>
+        )}
+         
+
       </div>
 
       {/* Buttons */}

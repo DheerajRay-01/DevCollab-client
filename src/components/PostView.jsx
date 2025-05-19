@@ -4,6 +4,8 @@ import { useParams } from "react-router";
 import axiosInstance from "../axios/axios";
 import { useSelector } from "react-redux";
 import AdminAccessCard from "./elements/cards/AdminAccessCard";
+import Comment from "./elements/comment/comment";
+
 
 function PostView() {
   const [data, setData] = useState(null);
@@ -25,6 +27,8 @@ function PostView() {
         ]);
 
         setData(PostDataResponse.data.data);
+        // console.log(PostDataResponse.data.data);
+        
         setIsSaved(isSavedRes.data.data.isSaved);
       } catch (error) {
         if (!axios.isCancel(error)) {
@@ -85,6 +89,7 @@ function PostView() {
         handlePostCardSubmitBtn={handlePostCardSubmitBtn}
         creatingPost={false}
       />
+    <Comment data={data}/>
     </>
   );
 }

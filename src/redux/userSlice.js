@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: null, 
   userPosts:[],
+  isGuest: false
 };
 
 export const userSlice = createSlice({
@@ -10,10 +11,17 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
+      state.isGuest = false
     },
     clearUser: (state) => {
       state.user = null;
+      state.isGuest = false 
     },
+
+    handelGuestTrue: (state,action) => {
+      state.isGuest = true;
+    },
+  
     setUserPost :(state, action) => {
       state.userPosts = action.payload; 
       // console.log(state.userPosts);
@@ -44,6 +52,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser,setUserPost,deleteUserPost ,addUserPost,changePostVisibility , deleteAllUserPost} = userSlice.actions;
+export const { setUser, clearUser,setUserPost,deleteUserPost ,addUserPost,changePostVisibility , deleteAllUserPost , handelGuestTrue} = userSlice.actions;
 
 export default userSlice.reducer;

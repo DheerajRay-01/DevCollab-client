@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import {   handelGuestTrue } from "../redux/userSlice";
 
 function Login() {
   const [isLoading, setIsLoading] = useState(false); // State to manage button disabling
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleLogin = async () => {
     setIsLoading(true); // Disable button
@@ -27,11 +30,12 @@ function Login() {
 
   const handleGuestLogin = () => {
     setIsLoading(true);
+    dispatch(handelGuestTrue())
     navigate("/");
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 px-4">
+    <div className="flex justify-center items-center min-h-screen px-4">
     <div className="bg-gray-800 bg-opacity-90 p-10 rounded-3xl shadow-2xl text-center w-full max-w-md backdrop-blur-md border border-gray-700">
       <h1 className="text-white text-4xl font-bold mb-4 tracking-wide">
         Welcome to <span className="text-blue-400">DevCollab</span>

@@ -21,21 +21,24 @@ import AnalyticsPage from "./pages/AnalyticsPage.jsx";
 import { setSavedData } from "./redux/savedSlice.js";
 import LoadingPage from "./pages/LoadingPage.jsx";
 import LoadingFailedPage from "./pages/LoadingFailedPage.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
 
 function App() {
   const dispatch = useDispatch();
   const {currentPage , limit} = useSelector((state)=> state.feed.feed)
-console.log(currentPage);
 
 
+ 
   useEffect(() => {
     
-    const fetchFeed = async () => {
+  const fetchFeed = async () => {
       try {
         const feedResponse = await axiosInstance.get(`/post/get-all-post?p=${currentPage}&l=${limit}`);
         dispatch(setFeedData(feedResponse.data.data));
       } catch (err) {
         console.error("Error fetching feed data:", err.message);
+        alert(err.message)
       }
     };
   
@@ -64,8 +67,6 @@ console.log(currentPage);
   }, []); 
 
 
-
-
   return  (
     <BrowserRouter>
 
@@ -86,12 +87,14 @@ console.log(currentPage);
             <Route path="/view/:post/:id" element={<PostViewPage/>} />
             <Route path="/my-post/:post/:id" element={<PostViewPage/>} />
             <Route path="/analytics/:id" element={<AnalyticsPage/>} />
+            <Route path="/Contact" element={<ContactPage/>  } />
           </Route>
         </Route>
 
         {/* Public Routes */}
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/failed" element={<LoadingFailedPage/>} />
+        <Route path="/landing" element={<LandingPage/>  } />
 
 
         {/* Catch-All Route for 404 */}

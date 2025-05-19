@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, NavLink, useParams } from "react-router";
 import { FiMenu, FiX, FiSearch, FiUser, FiSettings, FiLogOut ,FiLogIn} from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { useDispatch ,useSelector } from "react-redux";
+import { setSearch,setFeedData, clearFeed } from "../redux/feedSlice";
+import axiosInstance from "../axios/axios";
 
 function Header() {
+   const {currentPage , limit , searchTerm} = useSelector((state)=> state.feed.feed)
+  const dispatch = useDispatch()
 
   const user = useSelector((state) => state.user?.user?.user);
 
@@ -27,6 +31,7 @@ function Header() {
     function handleEscapeKey(event) {
       if (event.key === "Escape") {
         setDropdownOpen(false);
+
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -36,6 +41,29 @@ function Header() {
       document.removeEventListener("keydown", handleEscapeKey);
     };
   }, []);
+
+  const handelSearch  = async (e) =>{
+     e.preventDefault();
+     setMenuOpen(false)
+     const searchValue = e.target.elements.searchInput.value.trim();
+     if (searchValue) {
+       dispatch(setSearch(searchValue))
+       
+       // fetchSearch(searchValue)
+       try {
+         const feedResponse = await axiosInstance.get(`/post/search-post?p=${currentPage}&l=${limit}&search=${searchValue}`);
+         dispatch(clearFeed())
+         console.log(feedResponse);
+          dispatch(setFeedData(feedResponse.data.data));
+        } catch (err) {
+          console.error("Error fetching feed data:", err.message);
+          alert(`" ${searchValue.toUpperCase()}" Projects Not Available`)
+          dispatch(setSearch(""))
+        }
+
+            }
+
+  }
 
   return (
     <nav
@@ -55,7 +83,10 @@ function Header() {
         {/* Logo */}
         <div
           className="text-2xl font-bold text-indigo-400 cursor-pointer transition-all hover:text-indigo-300"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/")
+            window.location.reload()
+          }}
         >
           DevCollab
         </div>
@@ -84,11 +115,17 @@ function Header() {
         {/* Search Bar (Hidden on Mobile) */}
         <div className="relative hidden md:flex items-center bg-gray-700 px-4 py-2 rounded-md shadow-md">
           <FiSearch className="text-gray-400 mr-2" />
-          <input
+          <form 
+           onSubmit={handelSearch}
+          >
+
+         <input
             type="text"
+            name="searchInput"
             placeholder="Search"
-            className="bg-transparent outline-none text-white placeholder-gray-400 w-36 md:w-48 focus:ring-0 focus:w-56 transition-all duration-300"
+            className="bg-transparent outline-none text-white placeholder-gray-500 w-36 md:w-48 focus:ring-0 focus:w-56 transition-all duration-300"
           />
+          </form>
         </div>
 
         {/* Profile Dropdown */}
@@ -147,6 +184,23 @@ function Header() {
       {menuOpen && (
         <div className="absolute top-16 left-0 w-full bg-[#1E293B] md:hidden shadow-lg transition-all duration-300 opacity-0 animate-slideDown">
           <ul className="flex flex-col space-y-2 p-4">
+            <li>
+                 <div className="relative flex items-center bg-gray-700 px-4 py-2 rounded-md shadow-md">
+                   <FiSearch className="text-gray-400 mr-2" />
+          <form 
+           onSubmit={handelSearch}
+          >
+
+         <input
+            type="text"
+            name="searchInput"
+            placeholder="Search"
+            className="bg-transparent outline-none text-white placeholder-gray-500 w-36 md:w-48 focus:ring-0 focus:w-56 transition-all duration-300"
+          />
+          </form>
+        </div>
+
+            </li>
             {["Explore", "Create Post", "Saved", "My Repos"].map((item, index) => (
               <li key={index}>
                 <NavLink

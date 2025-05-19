@@ -4,15 +4,18 @@ import { useState } from "react";
 import axiosInstance from "../axios/axios.js";
 import { setFeedData } from "../redux/feedSlice.js";
 import { FaSpinner } from "react-icons/fa";
-  
+import { useEffect } from "react";
+
 function Home() {
+
   const dispatch = useDispatch();
 
-  const { feed, currentPage, limit } = useSelector((state) => state.feed.feed);
+  const { feed, currentPage, limit ,searchTerm} = useSelector((state) => state.feed.feed);
 
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState("");
+
 
   const getMoreFeed = async () => {
     setLoading(true);
@@ -35,15 +38,15 @@ function Home() {
     }
   };
 
- 
 
   return  (
     <div className="min-h-screen px-4 sm:px-8 py-8">
       <div className="max-w-7xl mx-auto">
         {/* Title Section */}
         <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center mb-10">
-          Open Source Projects 🚀
+          {searchTerm ?`${searchTerm.toUpperCase()} Projects 🚀 (${feed.length}) ` : "Open Source Projects 🚀"}
         </h1>
+
         {/* Grid Layout for Project Cards */}
         {error && (
   <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md mt-4">
@@ -82,6 +85,10 @@ function Home() {
   </button>
 </div>
 }
+
+
+  
+
       </div>
     </div>
   )

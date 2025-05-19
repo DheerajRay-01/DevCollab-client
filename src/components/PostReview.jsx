@@ -16,10 +16,16 @@ function PostReview() {
   const [postDescription, setPostDescription] = useState(
     postData?.repoData?.description || `${postData?.repoData?.repoName} is an open-source project designed to simplify development and enhance collaboration. Explore its features and contribute! 🚀`,
   );
+  const [postTags, setPostTags] = useState(
+    postData?.repoData?.tags
+  );
 
   if (!postData || !postData.repoData) {
     return <Navigate to="/" />;
   } 
+
+  
+  
 
   const data = {
     repoName: postData?.repoData?.repoName || "",
@@ -40,13 +46,16 @@ function PostReview() {
     contributors: postData?.contributors || [],
     issues: postData?.issues || [],
     languages: postData?.languages || {},
+    tags : postTags,
   };
+
+
 
   const handlePostCardSubmitBtn = async () => {
     try {
       console.log("Post creation initiated...");
       setLoading(true);
-
+      
       const response = await axiosInstance.post("/repo/uploading-post", data);
       // console.log(response.data);
       if (!response?.data) {
@@ -93,6 +102,7 @@ function PostReview() {
       data={data}
       handlePostCardSubmitBtn={handlePostCardSubmitBtn}
       setPostDescription={setPostDescription}
+      setPostTags={setPostTags}
       loading={loading}
       creatingPost={true}
     />

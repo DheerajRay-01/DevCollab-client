@@ -1,13 +1,13 @@
 import React from 'react'
 import Home from '../components/Home'
-
 function HomePage() {
-  return (
+ return  (
     <div>
-      
-      <Home/>
+      <Home/> 
     </div>
-  )
+)
+
+return 
 }
 
 export default HomePage

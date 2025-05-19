@@ -17,7 +17,7 @@ export default function Footer() {
           {["Privacy Policy", "Terms of Service", "Contact"].map((item, index) => (
             <li key={index}>
               <a 
-                href="#" 
+                href={`/${item}`} 
                 className="hover:text-white transition duration-300"
               >
                 {item}
