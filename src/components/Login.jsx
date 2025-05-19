@@ -76,6 +76,9 @@ function Login() {
       >
         {isLoading ? "Redirecting..." : "Continue without Login"}
       </button>
+       <p className="text-gray-400 text-xs mt-4">
+          Note: Currently, Brave and Firefox browsers are not supported.
+        </p>
     </div>
   </div>
   );
