@@ -1,12 +1,40 @@
-# React + Vite
+# DevCollab Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DevCollab is a collaborative platform for developers, designed to simplify project discovery and interaction using GitHub. This repository contains the frontend code, built with React and Tailwind CSS, for a seamless and responsive user experience.
 
-Currently, two official plugins are available:
+## 🚀 Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **GitHub OAuth Login:** Secure authentication using GitHub.
+* **User Profiles:** Display GitHub stats and contributions.
+* **Project Posts:** Share and showcase GitHub repositories.
+* **Structured Discussions:** Comment on posts for clear project feedback.
+* **Save for Later:** Bookmark posts for future reference.
+* **Responsive Design:** Optimized for all devices using Tailwind CSS.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Frontend:** React, Tailwind CSS, Vite, Axios, Framer Motion, DaisyUI
+* **Backend:** Node.js, Express.js, MongoDB ([Backend Repository](https://github.com/DheerajRay-01/DevCollab-server))
+* **Authentication:** GitHub OAuth
+* **State Management:** Redux Toolkit
+* **Icons:** Lucide React, React Icons
+* **Email Integration:** EmailJS, Resend
+
+## 🚦 Deployment
+
+* **Frontend:** Vercel ([Live Site](https://dev-collab-client.vercel.app))
+* **Backend:** Render ([Backend Repo](https://github.com/DheerajRay-01/DevCollab-server))
+
+## 🤝 Contributing
+
+We welcome contributions! To get started:
+
+1. Fork this repository.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Commit your changes (`git commit -m 'Add feature name'`).
+4. Push to your branch (`git push origin feature-name`).
+5. Open a pull request.
+
+---
+
+⭐️ If you find this project helpful, consider starring the repo!
