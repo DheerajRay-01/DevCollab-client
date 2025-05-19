@@ -90,6 +90,17 @@ const PrivacyPolicy = () => {
             https://dev-collab-client.vercel.app/
           </a>
         </p>
+        <p className="text-gray-700">
+          <strong>Project Repo:</strong>{" "}
+          <a 
+            href="https://github.com/DheerajRay-01/DevCollab-client" 
+            target="_blank" 
+            rel="noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline transition-colors duration-200"
+          >
+            DevCollab-client
+          </a>
+        </p>
       </section>
     </div>
   );
