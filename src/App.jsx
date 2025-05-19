@@ -25,6 +25,7 @@ import LandingPage from "./pages/LandingPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import { detectBrowser } from "./components/browser/checkBrowser.js";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage.jsx";
+import TermsAndConditionsPage from "./pages/TermsAndConditionsPage.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -89,6 +90,7 @@ function App() {
             <Route path="/analytics/:id" element={<AnalyticsPage/>} />
             <Route path="/Contact" element={<ContactPage/>  } />
             <Route path="/Privacy-Policy" element={<PrivacyPolicyPage/>  } />
+            <Route path="/Terms-Conditions" element={<TermsAndConditionsPage/>  } />
           </Route>
         </Route>
 
