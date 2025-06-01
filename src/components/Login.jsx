@@ -40,8 +40,8 @@ function Login() {
   useEffect(()=>{
 detectBrowser()
     .then((browser )=>{
-      if(browser == "Brave" || browser == "Firefox"){
-        alert("Firefox & Brave browsers are currently not supported.\nPlease use a different browser (Chrome , Edge etc.).")
+      if( browser == "Firefox"){
+        alert("Firefox browsers is currently not supported.\nPlease use a different browser (Chrome , Edge etc.).")
       }
       });
   },[])
